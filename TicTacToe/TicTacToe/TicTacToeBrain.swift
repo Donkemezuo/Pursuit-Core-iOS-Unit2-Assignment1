@@ -10,4 +10,9 @@ import Foundation
 
 class TicTacToeBrain {
   
+    // this class should handle all the logics
+    // did you win
+    // location of the x, o
+    // Know's turn it is
+    
 }

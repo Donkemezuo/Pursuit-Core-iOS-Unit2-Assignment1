@@ -9,9 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    @IBOutlet weak var firstButton: GameButton!
+    
   override func viewDidLoad() {
     super.viewDidLoad()
+    print("we are making tic tac toe!")
     // Do any additional setup after loading the view, typically from a nib.
   }
 
