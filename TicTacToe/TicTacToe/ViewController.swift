@@ -9,48 +9,36 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var firstButton: GameButton!
-    @IBOutlet weak var secondButton: GameButton!
-    @IBOutlet weak var thirdButton: GameButton!
-    @IBOutlet weak var fourthButton: GameButton!
-    @IBOutlet weak var fifthButton: GameButton!
-    @IBOutlet weak var sixthButton: GameButton!
-    @IBOutlet weak var seventhButton: GameButton!
-    @IBOutlet weak var eightButton: GameButton!
-    @IBOutlet weak var ninethButton: GameButton!
+
     @IBOutlet weak var gameLabel: UILabel!
     
-    @IBOutlet weak var scores: UILabel!
-    var scoresBoard = 0
+
+    var activeGame = true
+    var myGameStatus = [0,0,0,0,0,0,0,0,0]
+    let winningcondition = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
+
+    var activePlayer = 1
+    @IBAction func MyGameButton(_ sender: UIButton) {
+        let activePosition = sender.tag 
+        if myGameStatus[activePosition] == 0 {
+            
+        myGameStatus[activePosition] = activePlayer
+            
+            if activePlayer == 1 {
+        sender.setImage(UIImage(named: "Nought"), for: [])
+        
+            activePlayer = 2
+        } else {
+            sender.setImage(UIImage(named: "Cross"), for: [])
+        activePlayer = 1
+        }
+   
+            for combination in winningcondition {
+                if myGameStatus[combination[0]] == 0 && myGameStatus[combination[0]] == myGameStatus[combination[1]] && myGameStatus[combination[1]] == myGameStatus[combination[2]] {
+            activeGame = false
     
-    @IBAction func myGame(_ sender: GameButton) {
-    }
-    
-    
-    @IBAction func theGame (_ sender: GameButton) {
-        
-        
-        
-var images:[UIImage] = [UIImage(named: "TicTacToeCross")!, UIImage(named: "TicTacToeNoughts")!]
-        
-let firstPlayer = images[0]
-let secondPlayer = images[1]
-        
-var myGameButtons:[[GameButton]] = [[firstButton, secondButton, thirdButton],
-                                            [fourthButton,
-                                             fifthButton, sixthButton],
-                                            [seventhButton, eightButton, ninethButton]
-        ]
-        
-var winConditions = [[firstButton, fourthButton, seventhButton],[secondButton, fifthButton, eightButton], [thirdButton, sixthButton, ninethButton], [firstButton, fifthButton, ninethButton], [thirdButton, fifthButton, seventhButton]
-        ]
-        
-var firstPlayerThreeButtons:[GameButton] = []
-var secondPlayerThreeButtons:[GameButton] = []
-        
-    }
-    
-    override func viewDidLoad() {
+                   print(myGameStatus[combination[0]])
+        func viewDidLoad() {
     super.viewDidLoad()
 
         
@@ -62,3 +50,7 @@ var secondPlayerThreeButtons:[GameButton] = []
 
 }
 
+}
+}
+}
+}

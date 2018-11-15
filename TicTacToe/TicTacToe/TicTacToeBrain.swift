@@ -6,13 +6,9 @@
 //  Copyright © 2018 Pursuit. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class TicTacToeBrain {
   
-    // this class should handle all the logics
-    // did you win
-    // location of the x, o
-    // Know's turn it is
-    
+    var winConditions:[[GameButton]] = []
 }
