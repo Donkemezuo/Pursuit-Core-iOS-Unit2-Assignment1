@@ -13,9 +13,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var gameLabel: UILabel!
     @IBOutlet weak var scoresBoard:UILabel!
     
-   var firstPlayerScore = 0
-    var secondPlayerScore = 0
+    @IBOutlet weak var NewGame: UIButton!
     
+    @IBOutlet var allMyButtons: [GameButton]!
+    
+    var gameCards:[UIImage] = [UIImage(named: "Cross")!, UIImage(named: "Nought")!]
+    
+    var firstPlayerScore = 0
+    var secondPlayerScore = 0
+    var tie = 0
     var myGameBoard = [
                         ["","",""],
                         ["","",""],
@@ -30,18 +36,26 @@ class ViewController: UIViewController {
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
                 player 2 score = \(secondPlayerScore)
+                Tie = \(tie)
+                Player 1 won
                 """
-                print("player 1 won")
+         
             } else if row == ["O", "O", "O"] {
                 secondPlayerScore += 1
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
                 player 2 score = \(secondPlayerScore)
+                Tie = \(tie)
+                Player 2 won
                 """
-                print("player 2 won")
             }
+        }
     }
-    }
+//            } else {
+//                tie += 1
+//    }
+//    }
+//    }
     func myColumnWinningCondition(arr: [[String]]) {
         for columnIndex in 0..<arr[0].count {
             if arr[0][columnIndex] == "X" && arr[1][columnIndex] == "X" && arr[2][columnIndex] == "X" {
@@ -49,16 +63,28 @@ class ViewController: UIViewController {
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
                 player 2 score = \(secondPlayerScore)
+                Tie = \(tie)
+                Player 1 won
                 """
-                print("Player 1 won")
+                
             } else if arr[0][columnIndex] == "O" && arr[1][columnIndex] == "O" && arr[2][columnIndex] == "O"{
                 secondPlayerScore += 1
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
                 player 2 score = \(secondPlayerScore)
+                Tie = \(tie)
+                Player 2 won
                 """
-                print("player 2 won")
-            }
+                
+        
+//        } else {
+//            tie += 1
+//                scoresBoard.text = """
+//                It's a tie
+//                """
+//        }
+//        }
+    }
         }
     }
     func myFirstDiagonalWinningCondition(arr:[[String]]) {
@@ -70,17 +96,26 @@ class ViewController: UIViewController {
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
                 player 2 score = \(secondPlayerScore)
+                Tie = \(tie)
+                Player 1 won
                 """
-                print("player 1 won")
+                
             } else if myFirstDiagonal == ["O","O","O"]{
                 secondPlayerScore += 1
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
                 player 2 score = \(secondPlayerScore)
+                Tie = \(tie)
+                Player 2 won
                 """
-                print("player 2 won")
-    }
+//    } else {
+//            tie += 1
+//                scoresBoard.text = """
+//                It's a tie
+//                """
+//        }
         }
+    }
     }
     func mySecondDiagonalWinningCondition(arr:[[String]]){
         var mySecondDiagonal = [String]()
@@ -91,16 +126,25 @@ class ViewController: UIViewController {
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
                 player 2 score = \(secondPlayerScore)
+                Tie = \(tie)
+                Player 1 won
                 """
-                print("player 1 won")
+                
             } else if mySecondDiagonal == ["O","O","O"] {
                 secondPlayerScore += 1
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
                 player 2 score = \(secondPlayerScore)
+                Tie = \(tie)
+                Player 2 won
                 """
-                print("player 2 won")
-            }
+//            } else {
+//            tie += 1
+//                scoresBoard.text = """
+//                It's a tie
+//                """
+//    }
+        }
     }
     }
     
@@ -111,6 +155,7 @@ class ViewController: UIViewController {
             myColumnWinningCondition(arr: myGameBoard)
             myFirstDiagonalWinningCondition(arr: myGameBoard)
             mySecondDiagonalWinningCondition(arr: myGameBoard)
+            
              activePlayer = 2
         } else if activePlayer == 2 {
             myGameBoard[currentLocation.0][currentLocation.1] = "O"
@@ -122,8 +167,17 @@ class ViewController: UIViewController {
     }
     }
 @IBAction func MyGameButton(_ sender: GameButton) {
-        let currentPosition = (sender.row,sender.col)
-   myGameBoardUpdate(currentLocation: currentPosition)
+    switch activePlayer {
+    case 1:
+    sender.setImage(UIImage.init(named: "Cross"), for: .normal)
+    case 2:
+        sender.setImage(UIImage.init(named:"Nought"), for: .normal)
+    default:
+        print("unknown Player")
+    }
+    let currentPosition = (sender.row,sender.col)
+        sender.isEnabled = false
+    myGameBoardUpdate(currentLocation: currentPosition)
    print(myGameBoard)
     }
 override func viewDidLoad() {
@@ -137,12 +191,26 @@ override func viewDidLoad() {
 
 
 }
+    @IBAction func gameRestart(_ sender: UIButton) {
+        for button in allMyButtons {
+            button.isEnabled = true
+            
+        
+        }
+        var myGameBoard = [
+            ["","",""],
+            ["","",""],
+            ["","",""]
+        ]
     }
 
 
 
 
+
 //}
 //}
 //}
+    
+}
 
