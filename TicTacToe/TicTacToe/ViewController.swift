@@ -33,15 +33,20 @@ class ViewController: UIViewController {
         for row in myGameBoard {
             if row == ["X", "X", "X"] {
                 firstPlayerScore += 1
+                for button in allMyButtons {
+                    button.isEnabled = false
+                }
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
                 player 2 score = \(secondPlayerScore)
                 Tie = \(tie)
                 Player 1 won
                 """
-         
             } else if row == ["O", "O", "O"] {
                 secondPlayerScore += 1
+                for button in allMyButtons {
+                    button.isEnabled = false
+                }
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
                 player 2 score = \(secondPlayerScore)
@@ -51,15 +56,13 @@ class ViewController: UIViewController {
             }
         }
     }
-//            } else {
-//                tie += 1
-//    }
-//    }
-//    }
     func myColumnWinningCondition(arr: [[String]]) {
         for columnIndex in 0..<arr[0].count {
             if arr[0][columnIndex] == "X" && arr[1][columnIndex] == "X" && arr[2][columnIndex] == "X" {
                 firstPlayerScore += 1
+                for button in allMyButtons {
+                    button.isEnabled = false
+                }
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
                 player 2 score = \(secondPlayerScore)
@@ -69,21 +72,15 @@ class ViewController: UIViewController {
                 
             } else if arr[0][columnIndex] == "O" && arr[1][columnIndex] == "O" && arr[2][columnIndex] == "O"{
                 secondPlayerScore += 1
+                for button in allMyButtons {
+                    button.isEnabled = false
+                }
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
                 player 2 score = \(secondPlayerScore)
                 Tie = \(tie)
                 Player 2 won
                 """
-                
-        
-//        } else {
-//            tie += 1
-//                scoresBoard.text = """
-//                It's a tie
-//                """
-//        }
-//        }
     }
         }
     }
@@ -92,6 +89,9 @@ class ViewController: UIViewController {
         for indexString in 0..<arr.count{
             myFirstDiagonal.append(arr[indexString][indexString])
             if myFirstDiagonal == ["X","X","X"]{
+                for button in allMyButtons {
+                    button.isEnabled = false
+                }
                 firstPlayerScore += 1
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
@@ -102,18 +102,15 @@ class ViewController: UIViewController {
                 
             } else if myFirstDiagonal == ["O","O","O"]{
                 secondPlayerScore += 1
+                for button in allMyButtons {
+                    button.isEnabled = false
+                }
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
                 player 2 score = \(secondPlayerScore)
                 Tie = \(tie)
                 Player 2 won
                 """
-//    } else {
-//            tie += 1
-//                scoresBoard.text = """
-//                It's a tie
-//                """
-//        }
         }
     }
     }
@@ -138,12 +135,6 @@ class ViewController: UIViewController {
                 Tie = \(tie)
                 Player 2 won
                 """
-//            } else {
-//            tie += 1
-//                scoresBoard.text = """
-//                It's a tie
-//                """
-//    }
         }
     }
     }
@@ -183,34 +174,21 @@ class ViewController: UIViewController {
 override func viewDidLoad() {
     super.viewDidLoad()
 
-        
-
-   
-    // Do any additional setup after loading the view, typically from a nib.
-  
-
-
 }
     @IBAction func gameRestart(_ sender: UIButton) {
         for button in allMyButtons {
             button.isEnabled = true
+            button.setImage(UIImage.init(named: "GameButton"), for: .normal)
             
-        
+            
+            myGameBoard = [
+                ["","",""],
+                ["","",""],
+                ["","",""]
+            ]
         }
-        var myGameBoard = [
-            ["","",""],
-            ["","",""],
-            ["","",""]
-        ]
     }
 
-
-
-
-
-//}
-//}
-//}
     
 }
 
