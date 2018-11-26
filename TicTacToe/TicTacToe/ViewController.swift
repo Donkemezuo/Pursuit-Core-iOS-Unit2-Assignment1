@@ -12,9 +12,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var gameLabel: UILabel!
     @IBOutlet weak var scoresBoard:UILabel!
-    
     @IBOutlet weak var NewGame: UIButton!
-    
     @IBOutlet var allMyButtons: [GameButton]!
     
     var gameCards:[UIImage] = [UIImage(named: "Cross")!, UIImage(named: "Nought")!]
@@ -29,13 +27,18 @@ class ViewController: UIViewController {
     ]
     var activePlayer = 1
     
+    
+    func buttonTurn(button: Bool){
+        for button in allMyButtons {
+            button.isEnabled = false
+        }
+    }
+    
     func myRowWinningCondition(arr:[[String]]) {
         for row in myGameBoard {
             if row == ["X", "X", "X"] {
                 firstPlayerScore += 1
-                for button in allMyButtons {
-                    button.isEnabled = false
-                }
+                buttonTurn(button: false)
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
                 player 2 score = \(secondPlayerScore)
@@ -44,9 +47,7 @@ class ViewController: UIViewController {
                 """
             } else if row == ["O", "O", "O"] {
                 secondPlayerScore += 1
-                for button in allMyButtons {
-                    button.isEnabled = false
-                }
+                buttonTurn(button: false)
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
                 player 2 score = \(secondPlayerScore)
@@ -60,9 +61,7 @@ class ViewController: UIViewController {
         for columnIndex in 0..<arr[0].count {
             if arr[0][columnIndex] == "X" && arr[1][columnIndex] == "X" && arr[2][columnIndex] == "X" {
                 firstPlayerScore += 1
-                for button in allMyButtons {
-                    button.isEnabled = false
-                }
+                buttonTurn(button: false)
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
                 player 2 score = \(secondPlayerScore)
@@ -72,9 +71,7 @@ class ViewController: UIViewController {
                 
             } else if arr[0][columnIndex] == "O" && arr[1][columnIndex] == "O" && arr[2][columnIndex] == "O"{
                 secondPlayerScore += 1
-                for button in allMyButtons {
-                    button.isEnabled = false
-                }
+                buttonTurn(button: false)
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
                 player 2 score = \(secondPlayerScore)
@@ -89,9 +86,7 @@ class ViewController: UIViewController {
         for indexString in 0..<arr.count{
             myFirstDiagonal.append(arr[indexString][indexString])
             if myFirstDiagonal == ["X","X","X"]{
-                for button in allMyButtons {
-                    button.isEnabled = false
-                }
+                buttonTurn(button: false)
                 firstPlayerScore += 1
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
@@ -102,9 +97,7 @@ class ViewController: UIViewController {
                 
             } else if myFirstDiagonal == ["O","O","O"]{
                 secondPlayerScore += 1
-                for button in allMyButtons {
-                    button.isEnabled = false
-                }
+                buttonTurn(button: false)
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
                 player 2 score = \(secondPlayerScore)
@@ -119,6 +112,7 @@ class ViewController: UIViewController {
         for index in 0..<arr.count{
             mySecondDiagonal.append(arr[index][arr.count - 1 - index])
             if mySecondDiagonal == ["X","X","X"]{
+                buttonTurn(button: false)
                 firstPlayerScore += 1
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
@@ -127,7 +121,9 @@ class ViewController: UIViewController {
                 Player 1 won
                 """
                 
+                
             } else if mySecondDiagonal == ["O","O","O"] {
+                buttonTurn(button: false)
                 secondPlayerScore += 1
                 scoresBoard.text = """
                 player 1 score = \(firstPlayerScore)
@@ -186,9 +182,9 @@ override func viewDidLoad() {
                 ["","",""],
                 ["","",""]
             ]
-        }
+        
     }
 
     
 }
-
+}
